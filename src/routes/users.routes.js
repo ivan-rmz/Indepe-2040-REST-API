@@ -1,11 +1,11 @@
 import { Router } from "express";
 
-import {getAllUsers} from '../controllers/users.controller'
+import {getAllUsers, getUserByEmail} from '../controllers/users.controller'
 
 const router = Router();
 
 //GET###############################################################################################################################################################################################
-router.get("/users/", getAllUsers);
+router.get("/users", getUserByEmail);
 
 
 //POST##############################################################################################################################################################################################
