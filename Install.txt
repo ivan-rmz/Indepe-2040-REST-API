@@ -1,0 +1,6 @@
+Install Poryecto RESTAPI
+
+npm init -y
+npm install
+npm install mssql morgan cors dotenv express
+npm install @babel/core @babel/cli @babel/preset-env @babel/node nodemon -D
