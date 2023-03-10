@@ -44,7 +44,7 @@ CREATE TABLE Menor (
     canal_difusion_plan VARCHAR(100),
     responsable VARCHAR(50),
     fecha_bautizo DATE,
-    nacido BIT,
+    fecha_tentativa_nacimiento BIT,
     acompanante VARCHAR(50),
     bautizo BIT
     -- Foreign keys
