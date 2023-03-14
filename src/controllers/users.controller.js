@@ -34,8 +34,8 @@ export const getLogin = async (req, res) => {
 };
 
 //POST##############################################################################################################################################################################################
-export const addNewUsuario = async (req, res) =>{
-    const { username, email, passwd} = req.body;
+export const addNewUsuario = async (req, res) => {
+    const { username, email, passwd } = req.body;
 
     try {
         const pool = await getConnection();
@@ -54,8 +54,6 @@ export const addNewUsuario = async (req, res) =>{
     }
 };
 
-// var moment = require('moment-timezone');
-//     var a = moment.tz("America/Monterrey");
 export const addNewDatosPersona = async (req, res) => {
     const { nombre, apellido_p, apellido_m, foto, persona_2040, fecha_nacimiento, sexo, telefono, estatus_acomp, seguro_medico } = req.body;
 
@@ -63,9 +61,9 @@ export const addNewDatosPersona = async (req, res) => {
     // if (nombre_usr == null || email == null) {
     //     return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
     // }
-    
-    if(foto == null) foto = 0;
-    if(sexo == null) foto = 0;
+
+    if (foto == null) foto = 0;
+    if (sexo == null) foto = 0;
 
     try {
         const pool = await getConnection();
@@ -92,6 +90,43 @@ export const addNewDatosPersona = async (req, res) => {
 };
 
 //PUT###############################################################################################################################################################################################
+export const updateEmailByID = async (req, res) => {
+    const { email } = req.body;
+    
+    // validating
+    if (email == null) {
+        return res.status(400).json({ msg: "Bad Request. Please fill all fields" });
+    }
 
+    try {
+        const pool = await getConnection();
+        await pool
+            .request()
+            .input("email", sql.VarChar, email)
+            .input("id_usr", req.params.id_usr)
+            .query(queries.updateEmailByID);
+        res.json("Se ha modificado con éxito el email de este usuario.");
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+};
 //DELETE###############################################################################################################################################################################################
 
+export const deleteUserByID = async (req, res) => {
+    try {
+      const pool = await getConnection();
+  
+      const result = await pool
+        .request()
+        .input("id_usr", req.params.id_usr)
+        .query(queries.deleteUserByID);
+  
+      if (result.rowsAffected[0] === 0) return res.sendStatus(404);
+  
+      return res.json("Se ha eliminado este usuario.");
+    } catch (error) {
+      res.status(500);
+      res.send(error.message);
+    }
+  };

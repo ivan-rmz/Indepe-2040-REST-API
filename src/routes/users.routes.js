@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { addNewDatosPersona, getLogin, addNewUsuario } from '../controllers/users.controller'
+import { addNewDatosPersona, getLogin, addNewUsuario, deleteUserByID, updateEmailByID } from '../controllers/users.controller'
 
 const router = Router();
 
@@ -16,10 +16,11 @@ router.post("/users", addNewUsuario);
 //Datos_Persona
 router.post("/datos_personas", addNewDatosPersona);
 
-//
 //PUT###############################################################################################################################################################################################
+router.put("/users/:id_usr", updateEmailByID)
 
 //DELETE############################################################################################################################################################################################
+router.delete("/users/:id_usr", deleteUserByID)
 
 //AUTH###############################################################################################################################################################################################
 
